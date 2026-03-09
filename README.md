@@ -16,6 +16,9 @@ A React-based video streaming UI built with TypeScript, Vite, Bootstrap 5, and R
 - **🍞 Auto Breadcrumbs** — Derived from route hierarchy using `useLocation`
 - **🐶 404 Page** — Amazon-style "Dogs of VideoParlour" with random dog photos
 - **📱 Responsive Layout** — Sidebar nav + Bootstrap grid
+- **❤️ Like/Favourite** — Add books to favourites from Home preview
+- **✨ Trending Spells** — Preview spells on Home and full list in Trending
+- **🏠 Hogwarts Houses** — Preview houses on Home and full list in Documentaries
 
 ## Pages
 
@@ -47,28 +50,32 @@ A React-based video streaming UI built with TypeScript, Vite, Bootstrap 5, and R
 src/
 ├── main.tsx                # Entry point (BrowserRouter + Bootstrap imports)
 ├── App.tsx                 # Route definitions, dark mode state
-├── routes.ts               # Centralized route config with getPath / getPageName
+├── types/                  # TypeScript types for API data
+├── hooks/                  # Custom hooks (useLikes, useFetch, useDarkMode)
+├── utils/                  # Utility functions (routes, getPath)
+├── constants/              # Route and API endpoint constants
 ├── components/
-│   ├── Layout.tsx          # Shared layout (Nav + Breadcrumb + Outlet + Footer)
-│   ├── Nav.tsx             # Sidebar navigation with NavLink
-│   ├── Breadcrumb.tsx      # Auto-generated breadcrumb trail
-│   ├── Footer.tsx          # Site footer with Link-based navigation
-│   ├── Home.tsx            # Home page with API-driven previews
-│   ├── Movies.tsx          # Book list (fetches /en/books)
-│   ├── Movie.tsx           # Single book card
-│   ├── Trending.tsx        # Spell grid (fetches /en/spells)
-│   ├── Documentries.tsx    # House cards (fetches /en/houses)
-│   ├── Collections.tsx     # Character search wrapper
-│   ├── SearchButton.tsx    # Character search with API fetch
-│   ├── NewReleases.tsx     # New releases page
-│   ├── TopRated.tsx        # Top rated page
-│   ├── MyLibrary.tsx       # My library page
-│   ├── Watchlist.tsx       # Watchlist page
-│   ├── About.tsx           # About page
-│   ├── NotFound.tsx        # Amazon-style 404 with dogs
-│   ├── Alert.tsx           # Dismissible alert (useState-based)
-│   ├── ListGroup.tsx       # Bootstrap list group
-│   └── Message.tsx         # Simple message display
+│   ├── layout/
+│   │   ├── Layout.tsx      # Shared layout (Nav + Breadcrumb + Outlet + Footer)
+│   │   ├── Nav.tsx         # Sidebar navigation with NavLink, dark mode toggle
+│   │   ├── Breadcrumb.tsx  # Auto-generated breadcrumb trail
+│   │   ├── Footer.tsx      # Site footer with Link-based navigation
+│   ├── pages/
+│   │   ├── Home.tsx        # Home page with API-driven previews
+│   │   ├── NewReleases.tsx # New releases page
+│   │   ├── Trending.tsx    # Spell grid (fetches /en/spells)
+│   │   ├── TopRated.tsx    # Top rated page
+│   │   ├── Collections.tsx # Character search wrapper
+│   │   ├── Documentries.tsx# House cards (fetches /en/houses)
+│   │   ├── MyLibrary.tsx   # My library page
+│   │   ├── Watchlist.tsx   # Watchlist page
+│   │   ├── About.tsx       # About page
+│   │   ├── NotFound.tsx    # Amazon-style 404 with dogs
+│   ├── common/
+│   │   ├── Movies.tsx      # Book list (fetches /en/books)
+│   │   ├── Movie.tsx       # Single book card
+│   │   ├── SearchButton.tsx# Character search with API fetch
+│   │   ├── Alert.tsx       # Dismissible alert (useState-based)
 ```
 
 ## Getting Started
