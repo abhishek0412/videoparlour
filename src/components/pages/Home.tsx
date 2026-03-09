@@ -1,28 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { getPath } from "../routes";
-
-interface Book {
-  number: number;
-  title: string;
-  cover: string;
-  releaseDate: string;
-  index: number;
-}
-
-interface Spell {
-  spell: string;
-  use: string;
-  index: number;
-}
-
-interface House {
-  house: string;
-  emoji: string;
-  founder: string;
-  colors: string[];
-  index: number;
-}
+import { API_ENDPOINTS } from "../../constants";
+import { getPath } from "../../utils";
+import type { Book, Spell, House } from "../../types";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -33,15 +13,9 @@ const Home = () => {
 
   useEffect(() => {
     Promise.all([
-      fetch("https://potterapi-fedeperin.vercel.app/en/books").then((r) =>
-        r.json(),
-      ),
-      fetch("https://potterapi-fedeperin.vercel.app/en/spells").then((r) =>
-        r.json(),
-      ),
-      fetch("https://potterapi-fedeperin.vercel.app/en/houses").then((r) =>
-        r.json(),
-      ),
+      fetch(API_ENDPOINTS.BOOKS).then((r) => r.json()),
+      fetch(API_ENDPOINTS.SPELLS).then((r) => r.json()),
+      fetch(API_ENDPOINTS.HOUSES).then((r) => r.json()),
     ])
       .then(([booksData, spellsData, housesData]) => {
         setBooks(booksData);

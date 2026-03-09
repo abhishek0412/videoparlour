@@ -1,5 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
-import { routes, getPageName, getPath } from "../routes";
+import { routes, getPageName, getPath } from "../../utils";
 
 const Breadcrumb = () => {
   const location = useLocation();

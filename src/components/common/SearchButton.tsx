@@ -1,16 +1,7 @@
 import { useState } from "react";
+import { API_ENDPOINTS } from "../../constants";
+import type { Character } from "../../types";
 import Alert from "./Alert";
-
-interface Character {
-  fullName: string;
-  nickname: string;
-  hogwartsHouse: string;
-  interpretedBy: string;
-  children: string[];
-  image: string;
-  birthdate: string;
-  index: number;
-}
 
 const Button = () => {
   const [search, setSearch] = useState("");
@@ -23,9 +14,7 @@ const Button = () => {
     setLoading(true);
     setError(null);
 
-    fetch(
-      `https://potterapi-fedeperin.vercel.app/en/characters?search=${encodeURIComponent(search)}`,
-    )
+    fetch(`${API_ENDPOINTS.CHARACTERS}?search=${encodeURIComponent(search)}`)
       .then((response) => {
         if (!response.ok) throw new Error("Failed to fetch characters");
         return response.json();

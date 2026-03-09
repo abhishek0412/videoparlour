@@ -19,18 +19,18 @@ A React-based video streaming UI built with TypeScript, Vite, Bootstrap 5, and R
 
 ## Pages
 
-| Route | Component | Description |
-|---|---|---|
-| `/` | Home | Hero banner with sneak peeks of all sections |
-| `/new-releases` | NewReleases | Harry Potter book catalogue |
-| `/trending` | Trending | Spell cards from the Potter API |
-| `/top-rated` | TopRated | Top-rated content |
-| `/collections` | Collections | Character search |
-| `/documentaries` | Documentaries | Hogwarts houses |
-| `/my-library` | MyLibrary | Personal library |
-| `/watchlist` | Watchlist | Saved-for-later list |
-| `/about` | About | About VideoParlour |
-| `*` | NotFound | 404 with random dogs 🐾 |
+| Route            | Component     | Description                                  |
+| ---------------- | ------------- | -------------------------------------------- |
+| `/`              | Home          | Hero banner with sneak peeks of all sections |
+| `/new-releases`  | NewReleases   | Harry Potter book catalogue                  |
+| `/trending`      | Trending      | Spell cards from the Potter API              |
+| `/top-rated`     | TopRated      | Top-rated content                            |
+| `/collections`   | Collections   | Character search                             |
+| `/documentaries` | Documentaries | Hogwarts houses                              |
+| `/my-library`    | MyLibrary     | Personal library                             |
+| `/watchlist`     | Watchlist     | Saved-for-later list                         |
+| `/about`         | About         | About VideoParlour                           |
+| `*`              | NotFound      | 404 with random dogs 🐾                      |
 
 ## Tech Stack
 
@@ -107,12 +107,12 @@ npm run lint
 
 All data is fetched from the [Potter API](https://potterapi-fedeperin.vercel.app/):
 
-| Endpoint | Used By | Returns |
-|---|---|---|
-| `/en/books` | Movies, Home | 8 Harry Potter books |
-| `/en/spells` | Trending, Home | Spell list |
-| `/en/houses` | Documentaries, Home | 4 Hogwarts houses |
-| `/en/characters?search=` | SearchButton | Character search results |
+| Endpoint                 | Used By             | Returns                  |
+| ------------------------ | ------------------- | ------------------------ |
+| `/en/books`              | Movies, Home        | 8 Harry Potter books     |
+| `/en/spells`             | Trending, Home      | Spell list               |
+| `/en/houses`             | Documentaries, Home | 4 Hogwarts houses        |
+| `/en/characters?search=` | SearchButton        | Character search results |
 
 ## License
 

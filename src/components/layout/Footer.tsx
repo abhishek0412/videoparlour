@@ -1,44 +1,9 @@
 import { Link } from "react-router-dom";
-import { getPath } from "../routes";
+import { FOOTER_LINKS } from "../../constants";
+import { getPath } from "../../utils";
 
 function Footer() {
   const currentYear = new Date().getFullYear();
-
-  const links = [
-    {
-      heading: "Browse",
-      items: [
-        { name: "New Releases" },
-        { name: "Trending" },
-        { name: "Top Rated" },
-        { name: "Collections" },
-      ],
-    },
-    {
-      heading: "Categories",
-      items: [
-        { name: "Action" },
-        { name: "Comedy" },
-        { name: "Drama" },
-        { name: "Horror" },
-        { name: "Sci-Fi" },
-        { name: "Documentaries" },
-      ],
-    },
-    {
-      heading: "My Account",
-      items: [{ name: "My Library" }, { name: "Watchlist" }],
-    },
-    {
-      heading: "Company",
-      items: [
-        { name: "About" },
-        { name: "Privacy Policy" },
-        { name: "Terms of Service" },
-        { name: "Contact Us" },
-      ],
-    },
-  ];
 
   return (
     <footer className="bg-body-tertiary py-4 mt-5 border-top">
@@ -54,7 +19,7 @@ function Footer() {
         </div>
         <hr className="border-secondary" />
         <div className="row">
-          {links.map((section) => (
+          {FOOTER_LINKS.map((section) => (
             <div className="col-6 col-md-3 mb-3" key={section.heading}>
               <h6 className="text-uppercase fw-bold">{section.heading}</h6>
               <ul className="list-unstyled">

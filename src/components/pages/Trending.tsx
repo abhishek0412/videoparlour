@@ -1,31 +1,13 @@
-import { useState, useEffect } from "react";
-
-interface Spell {
-  spell: string;
-  use: string;
-  index: number;
-}
+import { useFetch } from "../../hooks";
+import { API_ENDPOINTS } from "../../constants";
+import type { Spell } from "../../types";
 
 const Trending = () => {
-  const [spells, setSpells] = useState<Spell[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("https://potterapi-fedeperin.vercel.app/en/spells")
-      .then((response) => {
-        if (!response.ok) throw new Error("Failed to fetch spells");
-        return response.json();
-      })
-      .then((data: Spell[]) => {
-        setSpells(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+  const {
+    data: spells,
+    loading,
+    error,
+  } = useFetch<Spell[]>(API_ENDPOINTS.SPELLS);
 
   if (loading) {
     return (
@@ -52,7 +34,7 @@ const Trending = () => {
         See what everyone is watching right now.
       </p>
       <div className="row">
-        {spells.map((spell) => (
+        {(spells ?? []).map((spell) => (
           <div className="col-md-4 col-lg-3 mb-3" key={spell.index}>
             <div className="card h-100 shadow-sm">
               <div className="card-body">

@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import { getPath } from "../routes";
+import { NAV_ITEMS } from "../../constants";
+import { getPath } from "../../utils";
 
 interface NavProps {
   darkMode: boolean;
@@ -7,35 +8,6 @@ interface NavProps {
 }
 
 function Nav({ darkMode, onToggleDarkMode }: NavProps) {
-  const navItems = [
-    { name: "Home" },
-    {
-      name: "Browse",
-      dropdown: [
-        { name: "New Releases" },
-        { name: "Trending" },
-        { name: "Top Rated" },
-        { divider: true },
-        { name: "Collections" },
-      ],
-    },
-    {
-      name: "Categories",
-      dropdown: [
-        { name: "Action" },
-        { name: "Comedy" },
-        { name: "Drama" },
-        { name: "Horror" },
-        { name: "Sci-Fi" },
-        { divider: true },
-        { name: "Documentaries" },
-      ],
-    },
-    { name: "My Library" },
-    { name: "Watchlist" },
-    { name: "About" },
-  ];
-
   return (
     <ul
       className="nav nav-pills flex-column bg-body-tertiary p-3 border-end"
@@ -57,7 +29,7 @@ function Nav({ darkMode, onToggleDarkMode }: NavProps) {
         </div>
       </li>
       <hr className="border-secondary" />
-      {navItems.map((item) => (
+      {NAV_ITEMS.map((item) => (
         <li
           className={`nav-item${item.dropdown ? " dropdown" : ""}`}
           key={item.name}

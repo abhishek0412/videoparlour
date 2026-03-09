@@ -1,36 +1,19 @@
-import { useState, useEffect, useCallback } from "react";
 import { Routes, Route } from "react-router-dom";
-import Layout from "./components/Layout";
-import Home from "./components/Home";
-import NewReleases from "./components/NewReleases";
-import Trending from "./components/Trending";
-import TopRated from "./components/TopRated";
-import Collections from "./components/Collections";
-import Documentaries from "./components/Documentries";
-import MyLibrary from "./components/MyLibrary";
-import Watchlist from "./components/Watchlist";
-import About from "./components/About";
-import NotFound from "./components/NotFound";
+import { useDarkMode } from "./hooks";
+import Layout from "./components/layout/Layout";
+import Home from "./components/pages/Home";
+import NewReleases from "./components/pages/NewReleases";
+import Trending from "./components/pages/Trending";
+import TopRated from "./components/pages/TopRated";
+import Collections from "./components/pages/Collections";
+import Documentaries from "./components/pages/Documentries";
+import MyLibrary from "./components/pages/MyLibrary";
+import Watchlist from "./components/pages/Watchlist";
+import About from "./components/pages/About";
+import NotFound from "./components/pages/NotFound";
 
 function App() {
-  const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem("darkMode") === "true";
-  });
-
-  const toggleDarkMode = useCallback(() => {
-    setDarkMode((prev) => {
-      const next = !prev;
-      localStorage.setItem("darkMode", String(next));
-      return next;
-    });
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.setAttribute(
-      "data-bs-theme",
-      darkMode ? "dark" : "light",
-    );
-  }, [darkMode]);
+  const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <Routes>

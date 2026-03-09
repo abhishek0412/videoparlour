@@ -1,34 +1,13 @@
-import { useState, useEffect } from "react";
-
-interface House {
-  house: string;
-  emoji: string;
-  founder: string;
-  colors: string[];
-  animal: string;
-  index: number;
-}
+import { useFetch } from "../../hooks";
+import { API_ENDPOINTS } from "../../constants";
+import type { House } from "../../types";
 
 const Documentries = () => {
-  const [houses, setHouses] = useState<House[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    fetch("https://potterapi-fedeperin.vercel.app/en/houses")
-      .then((response) => {
-        if (!response.ok) throw new Error("Failed to fetch houses");
-        return response.json();
-      })
-      .then((data: House[]) => {
-        setHouses(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+  const {
+    data: houses,
+    loading,
+    error,
+  } = useFetch<House[]>(API_ENDPOINTS.HOUSES);
 
   if (loading) {
     return (
@@ -55,7 +34,7 @@ const Documentries = () => {
         Eye-opening documentaries from around the world.
       </p>
       <div className="row">
-        {houses.map((house) => (
+        {(houses ?? []).map((house) => (
           <div className="col-md-6 col-lg-3 mb-4" key={house.index}>
             <div
               className="card h-100 shadow-sm text-center"
