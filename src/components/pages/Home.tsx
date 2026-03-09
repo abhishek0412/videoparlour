@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { API_ENDPOINTS } from "../../constants";
-import { getPath } from "../../utils";
-import { useLikes } from "../../hooks";
-import type { Book, Spell, House } from "../../types";
+import { useState, useEffect } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { API_ENDPOINTS } from '../../constants';
+import { getPath } from '../../utils';
+import { useLikes } from '../../hooks';
+import type { Book, Spell, House } from '../../types';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const Home = () => {
         </p>
         <button
           className="btn btn-primary btn-lg"
-          onClick={() => navigate(getPath("Collections"))}
+          onClick={() => navigate(getPath('Collections'))}
         >
           🔍 Search Characters
         </button>
@@ -58,7 +58,7 @@ const Home = () => {
       <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h3>📚 New Releases</h3>
-          <Link to={getPath("New Releases")} className="text-decoration-none">
+          <Link to={getPath('New Releases')} className="text-decoration-none">
             View All →
           </Link>
         </div>
@@ -74,28 +74,28 @@ const Home = () => {
                       src={book.cover}
                       className="card-img-top"
                       alt={book.title}
-                      style={{ height: "200px", objectFit: "cover" }}
+                      style={{ height: '200px', objectFit: 'cover' }}
                     />
                     <button
                       className="btn btn-sm position-absolute top-0 end-0 m-1 rounded-circle shadow"
                       style={{
-                        width: "32px",
-                        height: "32px",
+                        width: '32px',
+                        height: '32px',
                         backgroundColor: liked
-                          ? "#dc3545"
-                          : "rgba(255,255,255,0.85)",
-                        border: "none",
-                        fontSize: "0.9rem",
-                        transition: "all 0.2s ease",
+                          ? '#dc3545'
+                          : 'rgba(255,255,255,0.85)',
+                        border: 'none',
+                        fontSize: '0.9rem',
+                        transition: 'all 0.2s ease',
                         lineHeight: 1,
                         padding: 0,
                       }}
                       onClick={() => toggleLike(id)}
                       title={
-                        liked ? "Remove from favourites" : "Add to favourites"
+                        liked ? 'Remove from favourites' : 'Add to favourites'
                       }
                     >
-                      {liked ? "❤️" : "🤍"}
+                      {liked ? '❤️' : '🤍'}
                     </button>
                   </div>
                   <div className="card-body p-2">
@@ -112,7 +112,7 @@ const Home = () => {
       <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h3>✨ Trending Spells</h3>
-          <Link to={getPath("Trending")} className="text-decoration-none">
+          <Link to={getPath('Trending')} className="text-decoration-none">
             View All →
           </Link>
         </div>
@@ -134,7 +134,7 @@ const Home = () => {
       <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h3>🏠 Hogwarts Houses</h3>
-          <Link to={getPath("Documentaries")} className="text-decoration-none">
+          <Link to={getPath('Documentaries')} className="text-decoration-none">
             View All →
           </Link>
         </div>
@@ -161,34 +161,31 @@ const Home = () => {
       {/* Quick Links */}
       <div className="row mb-4">
         <div className="col-md-4 mb-3">
-          <div
-            className="card bg-primary text-white text-center p-4 shadow h-100"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate(getPath("My Library"))}
+          <Link
+            to={getPath('My Library')}
+            className="card bg-primary text-white text-center p-4 shadow h-100 text-decoration-none"
           >
             <h4>📖 My Library</h4>
             <p className="mb-0">Access your saved content</p>
-          </div>
+          </Link>
         </div>
         <div className="col-md-4 mb-3">
-          <div
-            className="card bg-success text-white text-center p-4 shadow h-100"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate(getPath("Watchlist"))}
+          <Link
+            to={getPath('Watchlist')}
+            className="card bg-success text-white text-center p-4 shadow h-100 text-decoration-none"
           >
             <h4>⭐ Watchlist</h4>
             <p className="mb-0">Your saved-for-later list</p>
-          </div>
+          </Link>
         </div>
         <div className="col-md-4 mb-3">
-          <div
-            className="card bg-info text-white text-center p-4 shadow h-100"
-            style={{ cursor: "pointer" }}
-            onClick={() => navigate(getPath("About"))}
+          <Link
+            to={getPath('About')}
+            className="card bg-info text-white text-center p-4 shadow h-100 text-decoration-none"
           >
             <h4>ℹ️ About Us</h4>
             <p className="mb-0">Learn more about VideoParlour</p>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

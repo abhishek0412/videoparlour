@@ -1,1 +1,1 @@
-export { routes, getPath, getPageName } from "./routes";
+export { routes, getPath, getPageName } from './routes';

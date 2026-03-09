@@ -1,6 +1,6 @@
-import { useFetch } from "../../hooks";
-import { API_ENDPOINTS } from "../../constants";
-import type { House } from "../../types";
+import { useFetch } from '../../hooks';
+import { API_ENDPOINTS } from '../../constants';
+import type { House } from '../../types';
 
 const Documentries = () => {
   const {
@@ -56,7 +56,7 @@ const Documentries = () => {
                     <span
                       key={color}
                       className="badge me-1"
-                      style={{ backgroundColor: color, color: "#fff" }}
+                      style={{ backgroundColor: color, color: '#fff' }}
                     >
                       {color}
                     </span>

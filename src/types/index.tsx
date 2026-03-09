@@ -1,2 +1,2 @@
-export type { Book, Spell, House, Character } from "./api";
-export type { RouteConfig } from "./routes";
+export type { Book, Spell, House, Character } from './api';
+export type { RouteConfig } from './routes';

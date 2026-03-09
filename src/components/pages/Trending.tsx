@@ -1,6 +1,6 @@
-import { useFetch } from "../../hooks";
-import { API_ENDPOINTS } from "../../constants";
-import type { Spell } from "../../types";
+import { useFetch } from '../../hooks';
+import { API_ENDPOINTS } from '../../constants';
+import type { Spell } from '../../types';
 
 const Trending = () => {
   const {

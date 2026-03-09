@@ -1,4 +1,4 @@
-import { useLikes } from "../../hooks";
+import { useLikes } from '../../hooks';
 
 interface MovieProps {
   number: number;
@@ -29,22 +29,22 @@ const Movie = ({
             src={cover}
             className="card-img-top"
             alt={title}
-            style={{ height: "300px", objectFit: "cover" }}
+            style={{ height: '300px', objectFit: 'cover' }}
           />
           <button
             className="btn btn-sm position-absolute top-0 end-0 m-2 rounded-circle shadow"
             style={{
-              width: "40px",
-              height: "40px",
-              backgroundColor: liked ? "#dc3545" : "rgba(255,255,255,0.85)",
-              border: "none",
-              fontSize: "1.2rem",
-              transition: "all 0.2s ease",
+              width: '40px',
+              height: '40px',
+              backgroundColor: liked ? '#dc3545' : 'rgba(255,255,255,0.85)',
+              border: 'none',
+              fontSize: '1.2rem',
+              transition: 'all 0.2s ease',
             }}
             onClick={() => toggleLike(id)}
-            title={liked ? "Remove from favourites" : "Add to favourites"}
+            title={liked ? 'Remove from favourites' : 'Add to favourites'}
           >
-            {liked ? "❤️" : "🤍"}
+            {liked ? '❤️' : '🤍'}
           </button>
         </div>
         <div className="card-body d-flex flex-column">
@@ -54,7 +54,7 @@ const Movie = ({
           </h5>
           <p className="card-text text-muted flex-grow-1">
             {description.length > 150
-              ? description.substring(0, 150) + "..."
+              ? description.substring(0, 150) + '...'
               : description}
           </p>
           <div className="d-flex justify-content-between align-items-center mt-2">

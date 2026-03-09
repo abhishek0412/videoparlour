@@ -1,4 +1,4 @@
-import SearchButton from "../common/SearchButton";
+import SearchButton from '../common/SearchButton';
 
 const Collections = () => {
   return (

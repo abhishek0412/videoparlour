@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
-import { NAV_ITEMS } from "../../constants";
-import { getPath } from "../../utils";
+import { NavLink } from 'react-router-dom';
+import { NAV_ITEMS } from '../../constants';
+import { getPath } from '../../utils';
 
 interface NavProps {
   darkMode: boolean;
@@ -11,7 +11,7 @@ function Nav({ darkMode, onToggleDarkMode }: NavProps) {
   return (
     <ul
       className="nav nav-pills flex-column bg-body-tertiary p-3 border-end"
-      style={{ minHeight: "100vh", minWidth: "200px" }}
+      style={{ minHeight: '100vh', minWidth: '200px' }}
     >
       <li className="nav-item mb-3">
         <div className="form-check form-switch">
@@ -24,27 +24,25 @@ function Nav({ darkMode, onToggleDarkMode }: NavProps) {
             onChange={onToggleDarkMode}
           />
           <label className="form-check-label" htmlFor="darkModeSwitch">
-            {darkMode ? "🌙 Dark Mode" : "☀️ Light Mode"}
+            {darkMode ? '🌙 Dark Mode' : '☀️ Light Mode'}
           </label>
         </div>
       </li>
       <hr className="border-secondary" />
       {NAV_ITEMS.map((item) => (
         <li
-          className={`nav-item${item.dropdown ? " dropdown" : ""}`}
+          className={`nav-item${item.dropdown ? ' dropdown' : ''}`}
           key={item.name}
         >
           {item.dropdown ? (
             <>
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
+              <button
+                className="nav-link dropdown-toggle btn btn-link"
                 data-bs-toggle="dropdown"
-                role="button"
                 aria-expanded="false"
               >
                 {item.name}
-              </a>
+              </button>
               <ul className="dropdown-menu">
                 {item.dropdown.map((dropdownItem, index) =>
                   dropdownItem.divider ? (
@@ -55,7 +53,7 @@ function Nav({ darkMode, onToggleDarkMode }: NavProps) {
                     <li key={dropdownItem.name}>
                       <NavLink
                         className={({ isActive }) =>
-                          `dropdown-item${isActive ? " active" : ""}`
+                          `dropdown-item${isActive ? ' active' : ''}`
                         }
                         to={getPath(dropdownItem.name!)}
                       >
@@ -69,10 +67,10 @@ function Nav({ darkMode, onToggleDarkMode }: NavProps) {
           ) : (
             <NavLink
               className={({ isActive }) =>
-                `nav-link${isActive ? " active" : ""}`
+                `nav-link${isActive ? ' active' : ''}`
               }
               to={getPath(item.name)}
-              end={item.name === "Home"}
+              end={item.name === 'Home'}
             >
               {item.name}
             </NavLink>
