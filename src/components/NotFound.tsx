@@ -91,9 +91,7 @@ const NotFound = () => {
             <strong>{dog.name}</strong>{" "}
             <span className="text-body-secondary">the {dog.breed}</span>
           </p>
-          <small className="text-body-secondary">
-            Dogs of VideoParlour 🐾
-          </small>
+          <small className="text-body-secondary">Dogs of VideoParlour 🐾</small>
         </div>
       </div>
 
@@ -102,12 +100,18 @@ const NotFound = () => {
         <Link to="/" className="btn btn-primary btn-lg px-4">
           🏠 Go Home
         </Link>
-        <button className="btn btn-outline-secondary btn-lg px-4" onClick={shuffle}>
+        <button
+          className="btn btn-outline-secondary btn-lg px-4"
+          onClick={shuffle}
+        >
           🐶 Meet Another Dog
         </button>
       </div>
 
-      <p className="text-body-secondary mt-4 mb-0" style={{ fontSize: "0.85rem" }}>
+      <p
+        className="text-body-secondary mt-4 mb-0"
+        style={{ fontSize: "0.85rem" }}
+      >
         If you think this page should exist,{" "}
         <Link to="/about" className="text-decoration-none">
           let us know

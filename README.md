@@ -1,73 +1,119 @@
-# React + TypeScript + Vite
+# 🎬 VideoParlour
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based video streaming UI built with TypeScript, Vite, Bootstrap 5, and React Router. Powered by the [Potter API](https://potterapi-fedeperin.vercel.app/) for demo content.
 
-Currently, two official plugins are available:
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?logo=vite)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- **📚 Browse Content** — Books, spells, houses, and characters from the wizarding world
+- **🔍 Character Search** — Live search against the Potter API
+- **🌙 Dark Mode** — Toggle with `data-bs-theme`, persisted in localStorage
+- **🧭 Client-side Routing** — React Router v7 with a centralized route config
+- **🍞 Auto Breadcrumbs** — Derived from route hierarchy using `useLocation`
+- **🐶 404 Page** — Amazon-style "Dogs of VideoParlour" with random dog photos
+- **📱 Responsive Layout** — Sidebar nav + Bootstrap grid
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Pages
 
-## Expanding the ESLint configuration
+| Route | Component | Description |
+|---|---|---|
+| `/` | Home | Hero banner with sneak peeks of all sections |
+| `/new-releases` | NewReleases | Harry Potter book catalogue |
+| `/trending` | Trending | Spell cards from the Potter API |
+| `/top-rated` | TopRated | Top-rated content |
+| `/collections` | Collections | Character search |
+| `/documentaries` | Documentaries | Hogwarts houses |
+| `/my-library` | MyLibrary | Personal library |
+| `/watchlist` | Watchlist | Saved-for-later list |
+| `/about` | About | About VideoParlour |
+| `*` | NotFound | 404 with random dogs 🐾 |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React 19** — UI library
+- **TypeScript 5.9** — Type safety
+- **Vite 7** — Build tool with HMR
+- **Bootstrap 5.3** — Styling & components (CSS + JS bundle)
+- **React Router 7** — Declarative routing with `<Link>`, `<NavLink>`, `useNavigate`, `useLocation`
+- **Potter API** — External data source (`/en/books`, `/en/spells`, `/en/houses`, `/en/characters`)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── main.tsx                # Entry point (BrowserRouter + Bootstrap imports)
+├── App.tsx                 # Route definitions, dark mode state
+├── routes.ts               # Centralized route config with getPath / getPageName
+├── components/
+│   ├── Layout.tsx          # Shared layout (Nav + Breadcrumb + Outlet + Footer)
+│   ├── Nav.tsx             # Sidebar navigation with NavLink
+│   ├── Breadcrumb.tsx      # Auto-generated breadcrumb trail
+│   ├── Footer.tsx          # Site footer with Link-based navigation
+│   ├── Home.tsx            # Home page with API-driven previews
+│   ├── Movies.tsx          # Book list (fetches /en/books)
+│   ├── Movie.tsx           # Single book card
+│   ├── Trending.tsx        # Spell grid (fetches /en/spells)
+│   ├── Documentries.tsx    # House cards (fetches /en/houses)
+│   ├── Collections.tsx     # Character search wrapper
+│   ├── SearchButton.tsx    # Character search with API fetch
+│   ├── NewReleases.tsx     # New releases page
+│   ├── TopRated.tsx        # Top rated page
+│   ├── MyLibrary.tsx       # My library page
+│   ├── Watchlist.tsx       # Watchlist page
+│   ├── About.tsx           # About page
+│   ├── NotFound.tsx        # Amazon-style 404 with dogs
+│   ├── Alert.tsx           # Dismissible alert (useState-based)
+│   ├── ListGroup.tsx       # Bootstrap list group
+│   └── Message.tsx         # Simple message display
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Getting Started
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- [Node.js](https://nodejs.org/) (v18+)
+- npm
+
+### Install & Run
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server with HMR
+npm run dev
 ```
+
+The app will be available at `http://localhost:5173/`.
+
+### Build for Production
+
+```bash
+npm run build
+npm run preview
+```
+
+### Lint
+
+```bash
+npm run lint
+```
+
+## API Reference
+
+All data is fetched from the [Potter API](https://potterapi-fedeperin.vercel.app/):
+
+| Endpoint | Used By | Returns |
+|---|---|---|
+| `/en/books` | Movies, Home | 8 Harry Potter books |
+| `/en/spells` | Trending, Home | Spell list |
+| `/en/houses` | Documentaries, Home | 4 Hogwarts houses |
+| `/en/characters?search=` | SearchButton | Character search results |
+
+## License
+
+This project is for learning purposes.
