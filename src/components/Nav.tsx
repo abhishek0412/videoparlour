@@ -1,11 +1,12 @@
+import { NavLink } from "react-router-dom";
+import { getPath } from "../routes";
+
 interface NavProps {
-  activePage: string;
-  onSelect: (page: string) => void;
   darkMode: boolean;
   onToggleDarkMode: () => void;
 }
 
-function Nav({ activePage, onSelect, darkMode, onToggleDarkMode }: NavProps) {
+function Nav({ darkMode, onToggleDarkMode }: NavProps) {
   const navItems = [
     { name: "Home" },
     {
@@ -34,11 +35,6 @@ function Nav({ activePage, onSelect, darkMode, onToggleDarkMode }: NavProps) {
     { name: "Watchlist" },
     { name: "About" },
   ];
-
-  const handleClick = (page: string, e: React.MouseEvent) => {
-    e.preventDefault();
-    onSelect(page);
-  };
 
   return (
     <ul
@@ -69,7 +65,7 @@ function Nav({ activePage, onSelect, darkMode, onToggleDarkMode }: NavProps) {
           {item.dropdown ? (
             <>
               <a
-                className={`nav-link dropdown-toggle${activePage === item.name ? " active" : ""}`}
+                className="nav-link dropdown-toggle"
                 href="#"
                 data-bs-toggle="dropdown"
                 role="button"
@@ -85,27 +81,29 @@ function Nav({ activePage, onSelect, darkMode, onToggleDarkMode }: NavProps) {
                     </li>
                   ) : (
                     <li key={dropdownItem.name}>
-                      <a
-                        className={`dropdown-item${activePage === dropdownItem.name ? " active" : ""}`}
-                        href="#"
-                        onClick={(e) => handleClick(dropdownItem.name!, e)}
+                      <NavLink
+                        className={({ isActive }) =>
+                          `dropdown-item${isActive ? " active" : ""}`
+                        }
+                        to={getPath(dropdownItem.name!)}
                       >
                         {dropdownItem.name}
-                      </a>
+                      </NavLink>
                     </li>
                   ),
                 )}
               </ul>
             </>
           ) : (
-            <a
-              className={`nav-link${activePage === item.name ? " active" : ""}`}
-              href="#"
-              onClick={(e) => handleClick(item.name, e)}
-              {...(activePage === item.name && { "aria-current": "page" })}
+            <NavLink
+              className={({ isActive }) =>
+                `nav-link${isActive ? " active" : ""}`
+              }
+              to={getPath(item.name)}
+              end={item.name === "Home"}
             >
               {item.name}
-            </a>
+            </NavLink>
           )}
         </li>
       ))}

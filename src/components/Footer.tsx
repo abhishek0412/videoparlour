@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import { getPath } from "../routes";
+
 function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -55,16 +58,23 @@ function Footer() {
             <div className="col-6 col-md-3 mb-3" key={section.heading}>
               <h6 className="text-uppercase fw-bold">{section.heading}</h6>
               <ul className="list-unstyled">
-                {section.items.map((item) => (
-                  <li key={item.name}>
-                    <a
-                      className="text-body-secondary text-decoration-none"
-                      href="#"
-                    >
-                      {item.name}
-                    </a>
-                  </li>
-                ))}
+                {section.items.map((item) => {
+                  const path = getPath(item.name);
+                  return (
+                    <li key={item.name}>
+                      {path !== "/" || item.name === "Home" ? (
+                        <Link
+                          className="text-body-secondary text-decoration-none"
+                          to={path}
+                        >
+                          {item.name}
+                        </Link>
+                      ) : (
+                        <span className="text-body-secondary">{item.name}</span>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

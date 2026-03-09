@@ -1,14 +1,17 @@
 import { useState, useEffect, useCallback } from "react";
-import Nav from "./components/Nav";
-import Footer from "./components/Footer";
-import Container from "./components/Container";
+import { Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout";
+import Home from "./components/Home";
+import NewReleases from "./components/NewReleases";
+import Trending from "./components/Trending";
+import TopRated from "./components/TopRated";
+import Collections from "./components/Collections";
+import Documentaries from "./components/Documentries";
+import MyLibrary from "./components/MyLibrary";
+import Watchlist from "./components/Watchlist";
+import About from "./components/About";
 
 function App() {
-  const [activePage, setActivePage] = useState(() => {
-    const hash = window.location.hash.replace("#", "");
-    return hash ? decodeURIComponent(hash) : "Home";
-  });
-
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem("darkMode") === "true";
   });
@@ -28,44 +31,33 @@ function App() {
     );
   }, [darkMode]);
 
-  const navigate = useCallback((page: string) => {
-    setActivePage(page);
-    window.history.pushState({ page }, "", `#${encodeURIComponent(page)}`);
-  }, []);
-
-  useEffect(() => {
-    const handlePopState = (event: PopStateEvent) => {
-      const page = event.state?.page || "Home";
-      setActivePage(page);
-    };
-
-    window.addEventListener("popstate", handlePopState);
-
-    // Set initial history state
-    window.history.replaceState(
-      { page: activePage },
-      "",
-      `#${encodeURIComponent(activePage)}`,
-    );
-
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
-
   return (
-    <div className="d-flex">
-      <Nav
-        activePage={activePage}
-        onSelect={navigate}
-        darkMode={darkMode}
-        onToggleDarkMode={toggleDarkMode}
-      />
-      <div className="flex-grow-1 d-flex flex-column">
-        <div className="flex-grow-1">
-          <Container activePage={activePage} onNavigate={navigate} />
-        </div>
-        <Footer />
-      </div>
-    </div>
+    <Routes>
+      <Route
+        element={
+          <Layout darkMode={darkMode} onToggleDarkMode={toggleDarkMode} />
+        }
+      >
+        <Route index element={<Home />} />
+        <Route path="new-releases" element={<NewReleases />} />
+        <Route path="trending" element={<Trending />} />
+        <Route path="top-rated" element={<TopRated />} />
+        <Route path="collections" element={<Collections />} />
+        <Route path="documentaries" element={<Documentaries />} />
+        <Route path="my-library" element={<MyLibrary />} />
+        <Route path="watchlist" element={<Watchlist />} />
+        <Route path="about" element={<About />} />
+        <Route
+          path="*"
+          element={
+            <div className="text-center py-5">
+              <h1>404</h1>
+              <p className="lead text-body-secondary">Page not found.</p>
+            </div>
+          }
+        />
+      </Route>
+    </Routes>
   );
 }
 

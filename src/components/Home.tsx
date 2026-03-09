@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { getPath } from "../routes";
 
 interface Book {
   number: number;
@@ -22,11 +24,8 @@ interface House {
   index: number;
 }
 
-interface HomeProps {
-  onNavigate?: (page: string) => void;
-}
-
-const Home = ({ onNavigate }: HomeProps) => {
+const Home = () => {
+  const navigate = useNavigate();
   const [books, setBooks] = useState<Book[]>([]);
   const [spells, setSpells] = useState<Spell[]>([]);
   const [houses, setHouses] = useState<House[]>([]);
@@ -63,10 +62,6 @@ const Home = ({ onNavigate }: HomeProps) => {
     );
   }
 
-  const handleNavigate = (page: string) => {
-    if (onNavigate) onNavigate(page);
-  };
-
   return (
     <div>
       {/* Hero Banner */}
@@ -77,7 +72,7 @@ const Home = ({ onNavigate }: HomeProps) => {
         </p>
         <button
           className="btn btn-primary btn-lg"
-          onClick={() => handleNavigate("Collections")}
+          onClick={() => navigate(getPath("Collections"))}
         >
           🔍 Search Characters
         </button>
@@ -87,16 +82,9 @@ const Home = ({ onNavigate }: HomeProps) => {
       <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h3>📚 New Releases</h3>
-          <a
-            href="#"
-            className="text-decoration-none"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavigate("New Releases");
-            }}
-          >
+          <Link to={getPath("New Releases")} className="text-decoration-none">
             View All →
-          </a>
+          </Link>
         </div>
         <div className="row">
           {books.slice(0, 4).map((book) => (
@@ -121,16 +109,9 @@ const Home = ({ onNavigate }: HomeProps) => {
       <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h3>✨ Trending Spells</h3>
-          <a
-            href="#"
-            className="text-decoration-none"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavigate("Trending");
-            }}
-          >
+          <Link to={getPath("Trending")} className="text-decoration-none">
             View All →
-          </a>
+          </Link>
         </div>
         <div className="row">
           {spells.slice(0, 6).map((spell) => (
@@ -150,16 +131,9 @@ const Home = ({ onNavigate }: HomeProps) => {
       <div className="mb-5">
         <div className="d-flex justify-content-between align-items-center mb-3">
           <h3>🏠 Hogwarts Houses</h3>
-          <a
-            href="#"
-            className="text-decoration-none"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavigate("Documentaries");
-            }}
-          >
+          <Link to={getPath("Documentaries")} className="text-decoration-none">
             View All →
-          </a>
+          </Link>
         </div>
         <div className="row">
           {houses.map((house) => (
@@ -187,7 +161,7 @@ const Home = ({ onNavigate }: HomeProps) => {
           <div
             className="card bg-primary text-white text-center p-4 shadow h-100"
             style={{ cursor: "pointer" }}
-            onClick={() => handleNavigate("My Library")}
+            onClick={() => navigate(getPath("My Library"))}
           >
             <h4>📖 My Library</h4>
             <p className="mb-0">Access your saved content</p>
@@ -197,7 +171,7 @@ const Home = ({ onNavigate }: HomeProps) => {
           <div
             className="card bg-success text-white text-center p-4 shadow h-100"
             style={{ cursor: "pointer" }}
-            onClick={() => handleNavigate("Watchlist")}
+            onClick={() => navigate(getPath("Watchlist"))}
           >
             <h4>⭐ Watchlist</h4>
             <p className="mb-0">Your saved-for-later list</p>
@@ -207,7 +181,7 @@ const Home = ({ onNavigate }: HomeProps) => {
           <div
             className="card bg-info text-white text-center p-4 shadow h-100"
             style={{ cursor: "pointer" }}
-            onClick={() => handleNavigate("About")}
+            onClick={() => navigate(getPath("About"))}
           >
             <h4>ℹ️ About Us</h4>
             <p className="mb-0">Learn more about VideoParlour</p>

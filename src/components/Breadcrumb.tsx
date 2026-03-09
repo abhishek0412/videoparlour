@@ -1,33 +1,20 @@
-interface BreadcrumbProps {
-  activePage: string;
-  onNavigate: (page: string) => void;
-}
+import { useLocation, Link } from "react-router-dom";
+import { routes, getPageName, getPath } from "../routes";
 
-// Maps child pages to their parent dropdown
-const parentMap: Record<string, string> = {
-  "New Releases": "Browse",
-  Trending: "Browse",
-  "Top Rated": "Browse",
-  Collections: "Browse",
-  Action: "Categories",
-  Comedy: "Categories",
-  Drama: "Categories",
-  Horror: "Categories",
-  "Sci-Fi": "Categories",
-  Documentaries: "Categories",
-};
+const Breadcrumb = () => {
+  const location = useLocation();
+  const currentPage = getPageName(location.pathname);
 
-const Breadcrumb = ({ activePage, onNavigate }: BreadcrumbProps) => {
   const trail: { name: string; active: boolean }[] = [
-    { name: "Home", active: activePage === "Home" },
+    { name: "Home", active: currentPage === "Home" },
   ];
 
-  if (activePage !== "Home") {
-    const parent = parentMap[activePage];
+  if (currentPage !== "Home") {
+    const parent = routes[currentPage]?.parent;
     if (parent) {
       trail.push({ name: parent, active: false });
     }
-    trail.push({ name: activePage, active: true });
+    trail.push({ name: currentPage, active: true });
   }
 
   return (
@@ -40,16 +27,12 @@ const Breadcrumb = ({ activePage, onNavigate }: BreadcrumbProps) => {
                 {item.name}
               </span>
             ) : (
-              <a
-                href="#"
+              <Link
+                to={getPath(item.name)}
                 className="badge rounded-pill bg-primary text-white text-decoration-none"
-                onClick={(e) => {
-                  e.preventDefault();
-                  onNavigate(item.name);
-                }}
               >
                 {item.name}
-              </a>
+              </Link>
             )}
           </li>
         ))}
