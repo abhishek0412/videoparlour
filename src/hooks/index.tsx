@@ -1,2 +1,3 @@
 export { default as useFetch } from "./useFetch";
 export { default as useDarkMode } from "./useDarkMode";
+export { default as useLikes } from "./useLikes";

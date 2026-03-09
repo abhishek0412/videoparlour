@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { API_ENDPOINTS } from "../../constants";
 import { getPath } from "../../utils";
+import { useLikes } from "../../hooks";
 import type { Book, Spell, House } from "../../types";
 
 const Home = () => {
   const navigate = useNavigate();
+  const { isLiked, toggleLike } = useLikes();
   const [books, setBooks] = useState<Book[]>([]);
   const [spells, setSpells] = useState<Spell[]>([]);
   const [houses, setHouses] = useState<House[]>([]);
@@ -61,21 +63,48 @@ const Home = () => {
           </Link>
         </div>
         <div className="row">
-          {books.slice(0, 4).map((book) => (
-            <div className="col-6 col-md-3 mb-3" key={book.index}>
-              <div className="card h-100 shadow-sm">
-                <img
-                  src={book.cover}
-                  className="card-img-top"
-                  alt={book.title}
-                  style={{ height: "200px", objectFit: "cover" }}
-                />
-                <div className="card-body p-2">
-                  <small className="fw-bold">{book.title}</small>
+          {books.slice(0, 4).map((book) => {
+            const id = `book-${book.number}`;
+            const liked = isLiked(id);
+            return (
+              <div className="col-6 col-md-3 mb-3" key={book.index}>
+                <div className="card h-100 shadow-sm">
+                  <div className="position-relative">
+                    <img
+                      src={book.cover}
+                      className="card-img-top"
+                      alt={book.title}
+                      style={{ height: "200px", objectFit: "cover" }}
+                    />
+                    <button
+                      className="btn btn-sm position-absolute top-0 end-0 m-1 rounded-circle shadow"
+                      style={{
+                        width: "32px",
+                        height: "32px",
+                        backgroundColor: liked
+                          ? "#dc3545"
+                          : "rgba(255,255,255,0.85)",
+                        border: "none",
+                        fontSize: "0.9rem",
+                        transition: "all 0.2s ease",
+                        lineHeight: 1,
+                        padding: 0,
+                      }}
+                      onClick={() => toggleLike(id)}
+                      title={
+                        liked ? "Remove from favourites" : "Add to favourites"
+                      }
+                    >
+                      {liked ? "❤️" : "🤍"}
+                    </button>
+                  </div>
+                  <div className="card-body p-2">
+                    <small className="fw-bold">{book.title}</small>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 
