@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { FOOTER_LINKS } from "../../constants";
-import { getPath } from "../../utils";
+import { Link } from 'react-router-dom';
+import { FOOTER_LINKS } from '../../constants';
+import { getPath } from '../../utils';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -27,7 +27,7 @@ function Footer() {
                   const path = getPath(item.name);
                   return (
                     <li key={item.name}>
-                      {path !== "/" || item.name === "Home" ? (
+                      {path !== '/' || item.name === 'Home' ? (
                         <Link
                           className="text-body-secondary text-decoration-none"
                           to={path}

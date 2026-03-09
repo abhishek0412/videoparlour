@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { API_ENDPOINTS } from "../../constants";
-import type { Character } from "../../types";
-import Alert from "./Alert";
+import { useState } from 'react';
+import { API_ENDPOINTS } from '../../constants';
+import type { Character } from '../../types';
+import Alert from './Alert';
 
 const Button = () => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState('');
   const [characters, setCharacters] = useState<Character[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,13 +16,13 @@ const Button = () => {
 
     fetch(`${API_ENDPOINTS.CHARACTERS}?search=${encodeURIComponent(search)}`)
       .then((response) => {
-        if (!response.ok) throw new Error("Failed to fetch characters");
+        if (!response.ok) throw new Error('Failed to fetch characters');
         return response.json();
       })
       .then((data: Character[]) => {
         setCharacters(data);
         setLoading(false);
-        if (data.length === 0) setError("No characters found.");
+        if (data.length === 0) setError('No characters found.');
       })
       .catch((err) => {
         setError(err.message);
@@ -39,7 +39,7 @@ const Button = () => {
           placeholder="Search a character (e.g. Harry, Hermione)..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
         />
         <button
           type="button"
@@ -47,7 +47,7 @@ const Button = () => {
           onClick={handleSearch}
           disabled={loading}
         >
-          {loading ? "Searching..." : "Search"}
+          {loading ? 'Searching...' : 'Search'}
         </button>
       </div>
 
@@ -62,9 +62,9 @@ const Button = () => {
                 className="card-img-top"
                 alt={character.fullName}
                 style={{
-                  height: "300px",
-                  objectFit: "contain",
-                  padding: "1rem",
+                  height: '300px',
+                  objectFit: 'contain',
+                  padding: '1rem',
                 }}
               />
               <div className="card-body">
@@ -73,7 +73,7 @@ const Button = () => {
                   <strong>Nickname:</strong> {character.nickname}
                 </p>
                 <p className="card-text">
-                  <strong>House:</strong>{" "}
+                  <strong>House:</strong>{' '}
                   <span className="badge bg-info">
                     {character.hogwartsHouse}
                   </span>
@@ -86,7 +86,7 @@ const Button = () => {
                 </p>
                 {character.children.length > 0 && (
                   <p className="card-text">
-                    <strong>Children:</strong> {character.children.join(", ")}
+                    <strong>Children:</strong> {character.children.join(', ')}
                   </p>
                 )}
               </div>

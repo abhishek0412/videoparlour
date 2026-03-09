@@ -1,6 +1,6 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
-const STORAGE_KEY = "videoparlour_likes";
+const STORAGE_KEY = 'videoparlour_likes';
 
 function getLikes(): Set<string> {
   try {

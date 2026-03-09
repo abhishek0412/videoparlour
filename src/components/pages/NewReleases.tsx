@@ -1,4 +1,4 @@
-import Movies from "../common/Movies";
+import Movies from '../common/Movies';
 
 const NewReleases = () => {
   return (

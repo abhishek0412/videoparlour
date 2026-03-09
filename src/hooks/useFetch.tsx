@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 interface UseFetchResult<T> {
   data: T | null;
@@ -16,7 +16,7 @@ function useFetch<T>(url: string): UseFetchResult<T> {
 
     fetch(url, { signal: controller.signal })
       .then((response) => {
-        if (!response.ok) throw new Error("Failed to fetch");
+        if (!response.ok) throw new Error('Failed to fetch');
         return response.json();
       })
       .then((result: T) => {
@@ -24,7 +24,7 @@ function useFetch<T>(url: string): UseFetchResult<T> {
         setLoading(false);
       })
       .catch((err) => {
-        if (err.name !== "AbortError") {
+        if (err.name !== 'AbortError') {
           setError(err.message);
           setLoading(false);
         }

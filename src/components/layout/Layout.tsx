@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
-import Nav from "./Nav";
-import Footer from "./Footer";
-import Breadcrumb from "./Breadcrumb";
+import { Outlet } from 'react-router-dom';
+import Nav from './Nav';
+import Footer from './Footer';
+import Breadcrumb from './Breadcrumb';
 
 interface LayoutProps {
   darkMode: boolean;

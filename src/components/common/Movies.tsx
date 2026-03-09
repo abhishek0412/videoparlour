@@ -1,7 +1,7 @@
-import { useFetch } from "../../hooks";
-import { API_ENDPOINTS } from "../../constants";
-import type { Book } from "../../types";
-import Movie from "./Movie";
+import { useFetch } from '../../hooks';
+import { API_ENDPOINTS } from '../../constants';
+import type { Book } from '../../types';
+import Movie from './Movie';
 
 const Movies = () => {
   const {

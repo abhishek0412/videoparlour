@@ -1,15 +1,15 @@
-import { useLocation, Link } from "react-router-dom";
-import { routes, getPageName, getPath } from "../../utils";
+import { useLocation, Link } from 'react-router-dom';
+import { routes, getPageName, getPath } from '../../utils';
 
 const Breadcrumb = () => {
   const location = useLocation();
   const currentPage = getPageName(location.pathname);
 
   const trail: { name: string; active: boolean }[] = [
-    { name: "Home", active: currentPage === "Home" },
+    { name: 'Home', active: currentPage === 'Home' },
   ];
 
-  if (currentPage !== "Home") {
+  if (currentPage !== 'Home') {
     const parent = routes[currentPage]?.parent;
     if (parent) {
       trail.push({ name: parent, active: false });
@@ -19,7 +19,7 @@ const Breadcrumb = () => {
 
   return (
     <nav aria-label="breadcrumb">
-      <ol className="breadcrumb" style={{ gap: "0.5rem" }}>
+      <ol className="breadcrumb" style={{ gap: '0.5rem' }}>
         {trail.map((item) => (
           <li className="breadcrumb-item" key={item.name}>
             {item.active ? (
