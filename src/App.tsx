@@ -1,35 +1,72 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState, useEffect, useCallback } from "react";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import Container from "./components/Container";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [activePage, setActivePage] = useState(() => {
+    const hash = window.location.hash.replace("#", "");
+    return hash ? decodeURIComponent(hash) : "Home";
+  });
+
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("darkMode") === "true";
+  });
+
+  const toggleDarkMode = useCallback(() => {
+    setDarkMode((prev) => {
+      const next = !prev;
+      localStorage.setItem("darkMode", String(next));
+      return next;
+    });
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "data-bs-theme",
+      darkMode ? "dark" : "light",
+    );
+  }, [darkMode]);
+
+  const navigate = useCallback((page: string) => {
+    setActivePage(page);
+    window.history.pushState({ page }, "", `#${encodeURIComponent(page)}`);
+  }, []);
+
+  useEffect(() => {
+    const handlePopState = (event: PopStateEvent) => {
+      const page = event.state?.page || "Home";
+      setActivePage(page);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    // Set initial history state
+    window.history.replaceState(
+      { page: activePage },
+      "",
+      `#${encodeURIComponent(activePage)}`,
+    );
+
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="d-flex">
+      <Nav
+        activePage={activePage}
+        onSelect={navigate}
+        darkMode={darkMode}
+        onToggleDarkMode={toggleDarkMode}
+      />
+      <div className="flex-grow-1 d-flex flex-column">
+        <div className="flex-grow-1">
+          <Container activePage={activePage} onNavigate={navigate} />
+        </div>
+        <Footer />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
-export default App
+export default App;
