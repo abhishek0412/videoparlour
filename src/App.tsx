@@ -10,6 +10,7 @@ import Documentaries from "./components/Documentries";
 import MyLibrary from "./components/MyLibrary";
 import Watchlist from "./components/Watchlist";
 import About from "./components/About";
+import NotFound from "./components/NotFound";
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -47,15 +48,7 @@ function App() {
         <Route path="my-library" element={<MyLibrary />} />
         <Route path="watchlist" element={<Watchlist />} />
         <Route path="about" element={<About />} />
-        <Route
-          path="*"
-          element={
-            <div className="text-center py-5">
-              <h1>404</h1>
-              <p className="lead text-body-secondary">Page not found.</p>
-            </div>
-          }
-        />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
